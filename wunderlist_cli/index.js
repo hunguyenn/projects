@@ -20,14 +20,6 @@ switch (process.argv[2]) {
 		console.log(process.env.CLIENT_ID);
 }
 
-
-
-// auth -> set environment variables
-
-
-
-
-
 // supported commands
 // authorize
 // avatar -> converts your pic into text characters
