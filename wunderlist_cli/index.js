@@ -2,6 +2,7 @@
 
 var request = require('request');
 var auth = require('./auth.js');
+var list = require('./list.js');
 var env = require('node-env-file');
 var fs = require('fs');
 
@@ -12,8 +13,10 @@ switch (process.argv[2]) {
 	case "auth":
 		auth(process.argv[3], process.argv[4]);
 		break;
+	case "list":
+		list();
+		break;
 	default:
-		
 		console.log(process.env.CLIENT_ID);
 }
 
