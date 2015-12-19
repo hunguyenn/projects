@@ -1,0 +1,14 @@
+{
+  "name": "wunderlist_cli",
+  "version": "1.0.0",
+  "description": "Command interface for wunderlist",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "preferGlobal": true,
+  "bin": {
+    "wunder": "index.js"
+  } 
+}
