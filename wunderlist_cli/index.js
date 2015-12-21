@@ -7,7 +7,14 @@ var env = require('node-env-file');
 var fs = require('fs');
 
 // put in try catch -> need to authorize if gets in catch
-env(__dirname + '/.env');
+
+if (process.argv[2] !== 'auth') {
+	try {
+		env(__dirname + '/.env');
+	} catch (err) {
+		console.log('Need to authenticate');
+	}
+}
 
 switch (process.argv[2]) {
 	case "auth":
@@ -17,8 +24,12 @@ switch (process.argv[2]) {
 		list();
 		break;
 	default:
-		console.log(process.env.CLIENT_ID);
+		console.log("Default: " + process.env.CLIENT_ID);
 }
+
+// usage
+// auth - clientId , accessToken
+
 
 // supported commands
 // authorize
