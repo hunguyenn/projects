@@ -3,6 +3,7 @@
 var request = require('request');
 var auth = require('./auth.js');
 var list = require('./list.js');
+var add = require('./add.js');
 var env = require('node-env-file');
 var fs = require('fs');
 
@@ -23,11 +24,10 @@ switch (process.argv[2]) {
 	case "list":
 		list();
 		break;
+	case "add":
+		add(process.argv[3], process.argv[4]);
+		break;
 	default:
-		
-
-
-
 		// check if process.argv[2] is undefined
 		// if no lists, tell them to call wunder list
 		var listJson = JSON.parse(fs.readFileSync('./.lists'));
@@ -48,13 +48,20 @@ switch (process.argv[2]) {
 			if (resp['invalid_request']) {
 				console.log('Unsuccessful authentication.');
 			} else {
-				console.log(resp);
+				console.log(listJson[process.argv[2]]['title']);
+				resp.forEach(function(task) {
+					console.log('    ' + task['title']);
+				});
 			}
 		});
 }
 
 // usage
 // auth - clientId , accessToken
+
+// add task to list
+// add a list
+// complete a task
 
 // list updates local reperesntation of lists
 // supported commands

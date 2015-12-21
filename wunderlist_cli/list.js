@@ -8,7 +8,7 @@ module.exports = function() {
 			'X-Client-ID': process.env.CLIENT_ID,
 		}
 	}
-	
+
 	request(options, function(err, res, body) {
 		var lists = JSON.parse(body); 
 		if (!err && res.statusCode === 200) {
@@ -16,7 +16,7 @@ module.exports = function() {
 			var json = {};
 			lists.forEach(function(list) {
 				json[i] =  {'title' : list['title'], 'id' : list['id']};
-				console.log('[' + i++ + '] ' + list['title'] + ' | ' + list['id'])
+				console.log('[' + i++ + '] ' + list['title']);
 				fs.open('./.lists', 'w', function(err, fd) {
 					if (err) console.log('Unable to create \'.lists\' file');
 					fs.writeFile('./.lists', JSON.stringify(json), function(err) {
