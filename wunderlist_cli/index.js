@@ -12,7 +12,7 @@ if (process.argv[2] !== 'auth') {
 	try {
 		env(__dirname + '/.env');
 	} catch (err) {
-		console.log('Need to authenticate');
+		console.log('Need to authenticate.');
 	}
 }
 
@@ -24,13 +24,14 @@ switch (process.argv[2]) {
 		list();
 		break;
 	default:
-		console.log("Default: " + process.env.CLIENT_ID);
+		console.log("Default: " + process.argv[2]);
+
 }
 
 // usage
 // auth - clientId , accessToken
 
-
+// list updates local reperesntation of lists
 // supported commands
 // authorize
 // avatar -> converts your pic into text characters

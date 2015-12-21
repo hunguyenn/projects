@@ -1,5 +1,6 @@
 module.exports = function() {
 	var request = require('request');
+	var fs = require('fs');
 	var options = {
 		url: 'https://a.wunderlist.com/api/v1/lists',
 		headers: {
@@ -11,7 +12,18 @@ module.exports = function() {
 	request(options, function(err, res, body) {
 		var lists = JSON.parse(body); 
 		if (!err && res.statusCode === 200) {
-			console.log(lists);
+			var i = 0;
+			var json = {};
+			lists.forEach(function(list) {
+				json[i++] =  {'title' : list['title'], 'id' : list['id']};
+				fs.open('./.lists', 'w', function(err, fd) {
+				if (err) console.log('Unable to create \'.lists\' file');
+				fs.writeFile('./.lists', JSON.stringify(json), function(err) {
+					if (err) return console.log('Unable to write to \'.lists\' file');
+				});
+			});
+			});
+			console.log(json);
 		} else {
 			console.log('code: ', res.statusCode);
 		}
