@@ -24,8 +24,33 @@ switch (process.argv[2]) {
 		list();
 		break;
 	default:
-		console.log("Default: " + process.argv[2]);
+		
 
+
+
+		// check if process.argv[2] is undefined
+		// if no lists, tell them to call wunder list
+		var listJson = JSON.parse(fs.readFileSync('./.lists'));
+		// console.log("Default: " + JSON.stringify(listJson));
+		var id = listJson[process.argv[2]]['id'];
+
+		var options = {
+			url: 'https://a.wunderlist.com/api/v1/tasks',
+			headers: {
+				'X-Access-Token': process.env.ACCESS_TOKEN,
+				'X-Client-ID': process.env.CLIENT_ID,
+			},
+			qs: {'list_id': id},
+		}
+
+		request(options, function(err, res, body) {
+			var resp = JSON.parse(body);
+			if (resp['invalid_request']) {
+				console.log('Unsuccessful authentication.');
+			} else {
+				console.log(resp);
+			}
+		});
 }
 
 // usage
