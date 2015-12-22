@@ -5,6 +5,7 @@ var auth = require('./auth.js');
 var list = require('./list.js');
 var add = require('./add.js');
 var comp = require('./comp.js');
+var addList = require('./addList.js');
 var env = require('node-env-file');
 var fs = require('fs');
 
@@ -31,7 +32,12 @@ switch (process.argv[2]) {
 	case "comp":
 		comp(process.argv[3]);
 		break;
+	case "addList":
+		addList(process.argv[3]);
+		break;
 	default:
+		displayList(process.argv[2]);
+		break;
 		// check if process.argv[2] is undefined
 		// if no lists, tell them to call wunder list
 		var listJson = JSON.parse(fs.readFileSync('./.lists'));
@@ -59,7 +65,6 @@ switch (process.argv[2]) {
 					json[i] = {'revision': task['revision'], 'title': task['title'], 'id': task['id'], 'list_id': task['list_id']};
 					console.log('[' + i++ + '] ' + task['title']);
 				});
-				// console.log(json);
 				fs.open('./.tasks', 'w', function(err, fd) {
 					if (err) console.log('Unable to create \'.tasks\' file');
 					fs.writeFile('./.tasks', JSON.stringify(json), function(err) {
@@ -73,9 +78,8 @@ switch (process.argv[2]) {
 // usage
 // auth - clientId , accessToken
 
-// add task to list
+// add task to list -> donezo
 // add a list -> donezo
-// complete a task
-
+// complete a task -> donezo
 // set default list
 // default list is default to add to / display if no list is specified
