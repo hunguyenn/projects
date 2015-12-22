@@ -1,4 +1,7 @@
 module.exports = function(listNum) {
+	if (listNum === undefined) {
+		listNum = process.env.DEFAULT_ID;
+	}
 	var fs = require('fs');
 	var request = require('request');
 	// check if process.argv[2] is undefined
