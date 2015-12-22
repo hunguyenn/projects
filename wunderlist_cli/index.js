@@ -6,6 +6,7 @@ var list = require('./list.js');
 var add = require('./add.js');
 var comp = require('./comp.js');
 var addList = require('./addList.js');
+var displayList = require('./displayList');
 var env = require('node-env-file');
 var fs = require('fs');
 
@@ -38,41 +39,6 @@ switch (process.argv[2]) {
 	default:
 		displayList(process.argv[2]);
 		break;
-		// check if process.argv[2] is undefined
-		// if no lists, tell them to call wunder list
-		var listJson = JSON.parse(fs.readFileSync('./.lists'));
-		// console.log("Default: " + JSON.stringify(listJson));
-		var id = listJson[process.argv[2]]['id'];
-
-		var options = {
-			url: 'https://a.wunderlist.com/api/v1/tasks',
-			headers: {
-				'X-Access-Token': process.env.ACCESS_TOKEN,
-				'X-Client-ID': process.env.CLIENT_ID,
-			},
-			qs: {'list_id': id},
-		}
-
-		request(options, function(err, res, body) {
-			var resp = JSON.parse(body);
-			if (resp['invalid_request']) {
-				console.log('Unsuccessful authentication.');
-			} else {
-				console.log(listJson[process.argv[2]]['title']);
-				var i = 0;
-				var json = {};
-				resp.forEach(function(task) {
-					json[i] = {'revision': task['revision'], 'title': task['title'], 'id': task['id'], 'list_id': task['list_id']};
-					console.log('[' + i++ + '] ' + task['title']);
-				});
-				fs.open('./.tasks', 'w', function(err, fd) {
-					if (err) console.log('Unable to create \'.tasks\' file');
-					fs.writeFile('./.tasks', JSON.stringify(json), function(err) {
-						if (err) console.log('Unable to write to \'.tasks\' file');
-					});
-				});
-			}
-		});
 }
 
 // usage
