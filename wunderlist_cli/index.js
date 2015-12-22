@@ -4,6 +4,7 @@ var request = require('request');
 var auth = require('./auth.js');
 var list = require('./list.js');
 var add = require('./add.js');
+var comp = require('./comp.js');
 var env = require('node-env-file');
 var fs = require('fs');
 
@@ -27,6 +28,9 @@ switch (process.argv[2]) {
 	case "add":
 		add(process.argv[3], process.argv[4]);
 		break;
+	case "comp":
+		comp(process.argv[3]);
+		break;
 	default:
 		// check if process.argv[2] is undefined
 		// if no lists, tell them to call wunder list
@@ -49,8 +53,18 @@ switch (process.argv[2]) {
 				console.log('Unsuccessful authentication.');
 			} else {
 				console.log(listJson[process.argv[2]]['title']);
+				var i = 0;
+				var json = {};
 				resp.forEach(function(task) {
-					console.log('    ' + task['title']);
+					json[i] = {'revision': task['revision'], 'title': task['title'], 'id': task['id'], 'list_id': task['list_id']};
+					console.log('[' + i++ + '] ' + task['title']);
+				});
+				// console.log(json);
+				fs.open('./.tasks', 'w', function(err, fd) {
+					if (err) console.log('Unable to create \'.tasks\' file');
+					fs.writeFile('./.tasks', JSON.stringify(json), function(err) {
+						if (err) console.log('Unable to write to \'.tasks\' file');
+					});
 				});
 			}
 		});
@@ -60,12 +74,8 @@ switch (process.argv[2]) {
 // auth - clientId , accessToken
 
 // add task to list
-// add a list
+// add a list -> donezo
 // complete a task
 
-// list updates local reperesntation of lists
-// supported commands
-// authorize
-// avatar -> converts your pic into text characters
-// handle command line arguments in one method
-// each command gets their own file
+// set default list
+// default list is default to add to / display if no list is specified

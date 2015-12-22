@@ -13,6 +13,7 @@ module.exports = function(listId, task) {
 		json: {'list_id': listJson[listId]['id'], 'title': task},
 	}
 	request(options, function(err, res, body) {
-		console.log(body);
+		console.log('Added successfully.');
+		// call default module here w/ id
 	});
 }
