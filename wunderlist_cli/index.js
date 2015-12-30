@@ -46,19 +46,3 @@ switch (process.argv[2]) {
 		displayTasks(process.argv[2]);
 		break;
 }
-
-// usage
-// auth - clientId , accessToken
-
-// add task to list -> donezo
-// add a list -> donezo
-// complete a task -> donezo
-// set default list -> donezo
-
-// print out after add, complete, etc
-// put print in separate module
-// format printing the tasks
-// put whole switch-case in a try-catch -> in case of error, print out usage
-
-// offline version
-// -> sync back to online on command
