@@ -1,6 +1,9 @@
-module.exports = function(listId, task) {
+module.exports = function(task) {
 	var fs = require('fs');
+	var taskJson = JSON.parse(fs.readFileSync(__dirname + '/.tasks'));
+	var listId = taskJson[0]['list_num'];
 	var request = require('request');
+	var displayTasks = require(__dirname + '/displayTasks.js');
 	var listJson = JSON.parse(fs.readFileSync(__dirname + '/.lists'));
 	var options = {
 		method: 'POST',
@@ -13,7 +16,6 @@ module.exports = function(listId, task) {
 		json: {'list_id': listJson[listId]['id'], 'title': task},
 	}
 	request(options, function(err, res, body) {
-		console.log('Added successfully.');
-		// call default module here w/ id
+		displayTasks(listId);
 	});
 }

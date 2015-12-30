@@ -1,8 +1,10 @@
 module.exports = function(taskId) {
 	var fs = require('fs');
 	var request = require('request');
+	var displayTasks = require(__dirname + '/displayTasks.js');
 	var tasks = JSON.parse(fs.readFileSync(__dirname + '/.tasks'));
 	var listId = tasks[0]['list_id'];
+	var listNum = tasks[0]['list_num'];
 	var task = tasks[taskId];
 	var revision = task['revision'];
 
@@ -18,6 +20,8 @@ module.exports = function(taskId) {
 	}
 
 	request(options, function(err, res, body) {
-		console.log('Successfully completed.');
+		if (res.statusCode === 200) {
+			displayTasks(listNum);
+		}
 	});
 }

@@ -28,7 +28,7 @@ module.exports = function(listNum) {
 			var i = 0;
 			var json = {};
 			resp.forEach(function(task) {
-				json[i] = {'revision': task['revision'], 'title': task['title'], 'id': task['id'], 'list_id': task['list_id']};
+				json[i] = {'revision': task['revision'], 'title': task['title'], 'id': task['id'], 'list_id': task['list_id'], 'list_num': listNum};
 				console.log('[' + i++ + '] ' + task['title']);
 			});
 			fs.open(__dirname + '/.tasks', 'w', function(err, fd) {

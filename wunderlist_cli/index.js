@@ -28,11 +28,7 @@ switch (process.argv[2]) {
 		list();
 		break;
 	case "add":
-		if (process.argv.length === 5) {
-			add(process.argv[3], process.argv[4]);
-		} else {
-			add(process.env.DEFAULT_ID, process.argv[3]);
-		}
+		add(process.argv[3]);
 		break;
 	case "comp":
 		comp(process.argv[3]);
