@@ -17,9 +17,9 @@ module.exports = function() {
 			lists.forEach(function(list) {
 				json[i] =  {'title' : list['title'], 'id' : list['id'], 'revision' : list['revision']};
 				console.log('[' + i++ + '] ' + list['title']);
-				fs.open('./.lists', 'w', function(err, fd) {
+				fs.open(__dirname + '/.lists', 'w', function(err, fd) {
 					if (err) console.log('Unable to create \'.lists\' file');
-					fs.writeFile('./.lists', JSON.stringify(json), function(err) {
+					fs.writeFile(__dirname + '/.lists', JSON.stringify(json), function(err) {
 						if (err) return console.log('Unable to write to \'.lists\' file');
 					});
 				});

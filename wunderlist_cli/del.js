@@ -17,7 +17,7 @@ module.exports = function(listNum) {
 	}
 
 	request(options, function(err, res, body) {
-		if (err === null) {
+		if (err === null && res.statusCode === 204) {
 			console.log('\'' + title + '\' deleted successfully.');
 		}
 	});
