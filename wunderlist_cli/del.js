@@ -1,6 +1,7 @@
 module.exports = function(listNum) {
 	var fs = require('fs');
 	var request = require('request');
+	var list_ = require(__dirname + '/list.js');
 	var listJson = JSON.parse(fs.readFileSync(__dirname + '/.lists'));
 	var list = listJson[listNum];
 	var revision = list['revision'];
@@ -18,7 +19,7 @@ module.exports = function(listNum) {
 
 	request(options, function(err, res, body) {
 		if (err === null && res.statusCode === 204) {
-			console.log('\'' + title + '\' deleted successfully.');
+			list_();
 		}
 	});
 }

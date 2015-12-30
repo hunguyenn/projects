@@ -1,5 +1,6 @@
 module.exports = function(name) {
 	var request = require('request');
+	var list = require(__dirname + '/list.js');
 	var options = {
 		method: 'POST',
 		url: 'https://a.wunderlist.com/api/v1/lists',
@@ -10,6 +11,8 @@ module.exports = function(name) {
 		json: {'title': name}
 	}
 	request(options, function(err, res, body) {
-		console.log('Successfully added list.');
+		if (res.statusCode === 201) {
+			list();
+		}
 	});
 }
