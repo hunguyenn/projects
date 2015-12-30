@@ -17,7 +17,7 @@ module.exports = function(clientId, accessToken) {
 			console.log('Successfully authenticated. \n\tName: ' + resp['name'] + "\n\tEmail: " + resp['email']);
 			fs.open(__dirname + '/.env', 'w', function(err, fd) {
 				if (err) console.log('Unable to create \'.env\' file');
-				fs.writeFile('./.env', 'CLIENT_ID=' + clientId + '\nACCESS_TOKEN=' + accessToken, function(err) {
+				fs.writeFile(__dirname + '/.env', 'CLIENT_ID=' + clientId + '\nACCESS_TOKEN=' + accessToken, function(err) {
 					if (err) return console.log('Unable to write to \'.env\' file');
 				});
 			});
