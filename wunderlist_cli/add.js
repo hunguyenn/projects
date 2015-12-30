@@ -1,7 +1,7 @@
 module.exports = function(listId, task) {
 	var fs = require('fs');
 	var request = require('request');
-	var listJson = JSON.parse(fs.readFileSync('./.lists'));
+	var listJson = JSON.parse(fs.readFileSync(__dirname + '/.lists'));
 	var options = {
 		method: 'POST',
 		url: 'https://a.wunderlist.com/api/v1/tasks',

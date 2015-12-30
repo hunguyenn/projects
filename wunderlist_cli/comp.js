@@ -1,7 +1,7 @@
 module.exports = function(taskId) {
 	var fs = require('fs');
 	var request = require('request');
-	var tasks = JSON.parse(fs.readFileSync('./.tasks'));
+	var tasks = JSON.parse(fs.readFileSync(__dirname + '/.tasks'));
 	var listId = tasks[0]['list_id'];
 	var task = tasks[taskId];
 	var revision = task['revision'];

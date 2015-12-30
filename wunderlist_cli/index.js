@@ -1,13 +1,13 @@
 #! /usr/bin/env node
 
 var request = require('request');
-var auth = require('./auth.js');
-var list = require('./list.js');
-var add = require('./add.js');
-var comp = require('./comp.js');
-var addList = require('./addList.js');
-var displayList = require('./displayList');
-var setDefault = require('./setDefault');
+var auth = require(__dirname + '/auth.js');
+var list = require(__dirname + '/list.js');
+var add = require(__dirname + '/add.js');
+var comp = require(__dirname + '/comp.js');
+var addList = require(__dirname + '/addList.js');
+var displayList = require(__dirname + '/displayList');
+var setDefault = require(__dirname + '/setDefault');
 var env = require('node-env-file');
 var fs = require('fs');
 

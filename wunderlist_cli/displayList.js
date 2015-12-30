@@ -6,7 +6,7 @@ module.exports = function(listNum) {
 	var request = require('request');
 	// check if process.argv[2] is undefined
 	// if no lists, tell them to call wunder list
-	var listJson = JSON.parse(fs.readFileSync('./.lists'));
+	var listJson = JSON.parse(fs.readFileSync(__dirname + '/.lists'));
 	// console.log("Default: " + JSON.stringify(listJson));
 	var id = listJson[listNum]['id'];
 
@@ -31,9 +31,9 @@ module.exports = function(listNum) {
 				json[i] = {'revision': task['revision'], 'title': task['title'], 'id': task['id'], 'list_id': task['list_id']};
 				console.log('[' + i++ + '] ' + task['title']);
 			});
-			fs.open('./.tasks', 'w', function(err, fd) {
+			fs.open(__dirname + '/.tasks', 'w', function(err, fd) {
 				if (err) console.log('Unable to create \'.tasks\' file');
-				fs.writeFile('./.tasks', JSON.stringify(json), function(err) {
+				fs.writeFile(__dirname + '/.tasks', JSON.stringify(json), function(err) {
 					if (err) console.log('Unable to write to \'.tasks\' file');
 				});
 			});
