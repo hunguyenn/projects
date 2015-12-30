@@ -6,8 +6,9 @@ var list = require(__dirname + '/list.js');
 var add = require(__dirname + '/add.js');
 var comp = require(__dirname + '/comp.js');
 var addList = require(__dirname + '/addList.js');
-var displayList = require(__dirname + '/displayList');
+var displayTasks = require(__dirname + '/displayTasks');
 var setDefault = require(__dirname + '/setDefault');
+var del = require(__dirname + '/del.js');
 var env = require('node-env-file');
 var fs = require('fs');
 
@@ -42,8 +43,11 @@ switch (process.argv[2]) {
 	case "setDefault":
 		setDefault(process.argv[3]);
 		break;
+	case "del":
+		del(process.argv[3]);
+		break;
 	default:
-		displayList(process.argv[2]);
+		displayTasks(process.argv[2]);
 		break;
 }
 

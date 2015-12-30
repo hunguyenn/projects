@@ -15,7 +15,7 @@ module.exports = function() {
 			var i = 0;
 			var json = {};
 			lists.forEach(function(list) {
-				json[i] =  {'title' : list['title'], 'id' : list['id']};
+				json[i] =  {'title' : list['title'], 'id' : list['id'], 'revision' : list['revision']};
 				console.log('[' + i++ + '] ' + list['title']);
 				fs.open('./.lists', 'w', function(err, fd) {
 					if (err) console.log('Unable to create \'.lists\' file');
